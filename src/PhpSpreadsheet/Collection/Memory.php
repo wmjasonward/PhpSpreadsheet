@@ -18,7 +18,7 @@ class Memory implements CacheInterface
     /**
      * @return bool
      */
-    public function clear()
+    public function clear() : bool
     {
         $this->cache = [];
 
@@ -30,7 +30,7 @@ class Memory implements CacheInterface
      *
      * @return bool
      */
-    public function delete($key)
+    public function delete(string $key) : bool
     {
         unset($this->cache[$key]);
 
@@ -42,7 +42,7 @@ class Memory implements CacheInterface
      *
      * @return bool
      */
-    public function deleteMultiple($keys)
+    public function deleteMultiple(iterable $keys) : bool
     {
         foreach ($keys as $key) {
             $this->delete($key);
@@ -57,7 +57,7 @@ class Memory implements CacheInterface
      *
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string $key, mixed $default = null) : mixed
     {
         if ($this->has($key)) {
             return $this->cache[$key];
@@ -72,7 +72,7 @@ class Memory implements CacheInterface
      *
      * @return iterable
      */
-    public function getMultiple($keys, $default = null)
+    public function getMultiple(iterable $keys, mixed $default = null) : iterable
     {
         $results = [];
         foreach ($keys as $key) {
@@ -87,7 +87,7 @@ class Memory implements CacheInterface
      *
      * @return bool
      */
-    public function has($key)
+    public function has(string $key) : bool
     {
         return array_key_exists($key, $this->cache);
     }
@@ -99,7 +99,7 @@ class Memory implements CacheInterface
      *
      * @return bool
      */
-    public function set($key, $value, $ttl = null)
+    public function set(string $key, mixed $value, null|int|\DateInterval $ttl = null)
     {
         $this->cache[$key] = $value;
 
@@ -112,7 +112,7 @@ class Memory implements CacheInterface
      *
      * @return bool
      */
-    public function setMultiple($values, $ttl = null)
+    public function setMultiple(iterable $values, null|int|\DateInterval $ttl = null): bool
     {
         foreach ($values as $key => $value) {
             $this->set($key, $value);
