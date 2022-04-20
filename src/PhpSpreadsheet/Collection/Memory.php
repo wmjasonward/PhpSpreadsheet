@@ -99,7 +99,7 @@ class Memory implements CacheInterface
      *
      * @return bool
      */
-    public function set(string $key, mixed $value, null|int|\DateInterval $ttl = null)
+    public function set(string $key, mixed $value, null|int|\DateInterval $ttl = null) : bool
     {
         $this->cache[$key] = $value;
 
